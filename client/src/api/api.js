@@ -29,4 +29,71 @@ export const login = async (data) => {
     );
     return response.data;
   };
+
+  export const getUser = async () => {
+    const config = {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    };
+    
+    const response = await axios.get(
+      "http://localhost:8080/auth/user",
+      config
+    );
+    return response.data;
+  };
+
+  export const getBoards = async () => {
+    const config = {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    };
+    
+    const response = await axios.get(
+      "http://localhost:8080/board/get",
+      config
+    );
+    return response.data;
+  };
+
+  export const getUsers = async () => {
+   
+    const response = await axios.get(
+      "http://localhost:8080/users"
+    );
+    return response.data;
+  };
   
+  export const createBoard = async (data) => {
+    const config = {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      }
+      
+    };
+    
+    const response = await axios.post(
+      "http://localhost:8080/board/create",
+      data,
+      config
+    );
+    return response.data;
+  };
+
+  export const givePermission = async (data) => {
+    const config = {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      }
+      
+    };
+    
+    const response = await axios.post(
+      "http://localhost:8080/board/permission",
+      data,
+      config
+    );
+    return response.data;
+  };

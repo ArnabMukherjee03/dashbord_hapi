@@ -1,4 +1,4 @@
-const { register, login, logout, getUser } = require("../controllers/auth.controller");
+const { register, login, logout, getUser, fetchUser } = require("../controllers/auth.controller");
 const { verifyJwt } = require("../middleware/auth.middleware");
 
 const router = [
@@ -35,6 +35,13 @@ const router = [
       ]
     },
   },
+  {
+    method: "GET",
+    path: "/users",
+    options: {
+      handler: fetchUser,
+    },
+  }
 ];
 
 module.exports = router;

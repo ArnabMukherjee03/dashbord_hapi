@@ -4,6 +4,7 @@ const { user } = require('../models')
 
 exports.verifyJwt = async (req, res) => {
   const accessToken = req.state?.accessToken || req.headers.authorization?.replace('Bearer ', '')
+  console.log(accessToken);
 
   if (!accessToken) {
     throw Boom.unauthorized('Unauthorized access')

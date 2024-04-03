@@ -14,7 +14,8 @@ const Login = () => {
     mutationFn: login,
     onSuccess: (response)=>{
        toast.success(response?.message)
-       localStorage.setItem("token",response?.data.accessToken)
+       console.log(response);
+       localStorage.setItem("token",response?.accessToken)
        navigate("/")
     },
     onError: (err)=>{
@@ -37,7 +38,6 @@ const Login = () => {
         <h2 className="text-2xl font-bold mb-6">Login</h2>
         <div className="mb-4">
           <label
-            
             className="block text-gray-700 text-sm font-bold mb-2"
             htmlFor="email"
           >
@@ -45,7 +45,7 @@ const Login = () => {
           </label>
           <input
            autoComplete="off"
-            className="w-full border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+            className="w-full border-b rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
             id="email"
             type="email"
             placeholder="Enter your email"
@@ -62,7 +62,7 @@ const Login = () => {
             Password
           </label>
           <input
-            className="w-full border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+            className="w-full border-b rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
             id="password"
             type="password"
             placeholder="Enter your password"
@@ -73,7 +73,7 @@ const Login = () => {
         </div>
         <div className="flex items-center justify-between mb-4">
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline disabled:bg-gray-300 disabled:cursor-not-allowed"
+            className="bg-black hover:opacity-[0.8] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline disabled:bg-gray-300 disabled:cursor-not-allowed"
             type="submit"
             disabled={isPending}
           >
@@ -83,7 +83,7 @@ const Login = () => {
         <div className="text-sm">
           <Link to="/forgotpassword"><p className="text-sm hover:underline mb-2">Forgot Password?</p></Link>
           <p>
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
             <Link to="/register" className="text-blue-500 hover:underline">
               Register now
             </Link>

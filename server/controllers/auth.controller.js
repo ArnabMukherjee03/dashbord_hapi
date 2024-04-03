@@ -114,10 +114,23 @@ const getUser = async (req, res) => {
 };
 
 
+const fetchUser = async (req, res) => {
+  try {
+    const users = await user.findAll({
+      attributes: { exclude: ['password'] }
+    })
+
+    return response(res, { users: users }, "User Fetched Succesfully", 200);
+  } catch (err) {
+    throw error({ message: err.message, status: "failure" }, err.message);
+  }
+};
+
 
 module.exports = {
   register,
   login,
   logout,
-  getUser
+  getUser,
+  fetchUser
 };
