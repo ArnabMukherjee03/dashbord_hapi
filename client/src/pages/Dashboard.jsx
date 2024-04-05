@@ -82,7 +82,7 @@ export const Dashboard = () => {
                   setPermission={() =>
                     setPermission(permission === board?.id ? null : board?.id)
                   }
-                  className="text-xl"
+                  className="text-xl text-white" 
                 />
                 {permission === board.id && (
                   <div className="absolute right-[-250px] z-50 top-[-10px] w-60 px-2 py-4 shadow-md border  bg-white">
@@ -134,7 +134,7 @@ export const Dashboard = () => {
           })}
           <Board
             onClick={() => setShow(!show)}
-            className="text-black text-lg flex items-center justify-center"
+            className="text-lg flex items-center justify-center text-black"
             data={{ name: "create new board" }}
           />
           {show && <CreateBoard onClick={() => setShow(false)} />}

@@ -1,4 +1,4 @@
-const { create, getBoards, givePermission } = require("../controllers/board.controller");
+const { create, getBoards, givePermission, getPermissionUser } = require("../controllers/board.controller");
 const { verifyJwt } = require("../middleware/auth.middleware");
 
 const router = [
@@ -31,6 +31,18 @@ const router = [
     path: "/board/permission",
     options: {
       handler: givePermission,
+      pre: [
+        {
+          method: verifyJwt
+        }
+      ]
+    },
+  },
+  {
+    method: "GET",
+    path: "/board/{boardId}/permission",
+    options: {
+      handler: getPermissionUser,
       pre: [
         {
           method: verifyJwt

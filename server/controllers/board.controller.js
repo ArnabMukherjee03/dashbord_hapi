@@ -1,5 +1,5 @@
 const { where } = require("sequelize");
-const { Board, UserBoardPermission, Sequelize } = require("../models");
+const { Board, UserBoardPermission, user } = require("../models");
 const error = require("../utils/Error");
 const response = require("../utils/Response");
 
@@ -19,15 +19,19 @@ const getBoards = async (req, res) => {
       where: {owner: req.user.id}
     })
 
+    const userPermissions = await UserBoardPermission.findAll({
+      where: { userId: req.user.id }
+    });
+    
+    // Extract the boardIds from the userPermissions
+    const boardIds = userPermissions.map(permission => permission.boardId);
+
     const boardsWithPermissions = await Board.findAll({
-      include: [{
-        model: UserBoardPermission,
-        where: { userId: req.user.id }
-      }]
+      where: { id: boardIds }
     });
 
-    // console.log(boardsWithPermissions);
-    return response(res, { boards: boards }, "Board Created Successfully", 201);
+
+    return response(res, { boards: [...boards,...boardsWithPermissions] }, "Board Created Successfully", 201);
   } catch (err) {
     console.log("123", err.message);
     throw error({ message: err.message, status: "failure" }, err.message);
@@ -55,8 +59,37 @@ const givePermission = async (req, res) => {
   }
 };
 
+const getPermissionUser = async (req,res)=>{
+  try {
+    const {boardId } = req.params;
+
+    const data =  await UserBoardPermission.findAll({
+       where: {boardId: boardId}
+    });
+
+    const board = await Board.findOne({
+       where: {id: boardId}
+    })
+
+    const userIds = data.map(data => data.userId);
+
+    const Users = await user.findAll({
+      where: { id: [...userIds,board.owner] },
+      attributes: { exclude: ['password'] }
+    });
+
+   
+
+    return response(res, {Users}, "Permission given", 201);
+  } catch (err) {
+    throw error({ message: err.message, status: "failure" }, err.message);
+  }
+
+}
+
 module.exports = {
   create,
   getBoards,
   givePermission,
+  getPermissionUser
 };

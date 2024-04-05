@@ -1,6 +1,8 @@
 const Hapi = require("@hapi/hapi");
 const authRouter = require("./routes/auth.route");
 const boardRouter = require("./routes/board.route");
+const listRouter = require("./routes/list.route");
+const commentRouter = require("./routes/comment.route");
 const port = parseInt(process.env.PORT) || 8080;
 
 const server = Hapi.server({
@@ -17,7 +19,7 @@ const server = Hapi.server({
 
 
 
-[...authRouter,...boardRouter].forEach((path) => server.route(path))
+[...authRouter,...boardRouter,...listRouter,...commentRouter].forEach((path) => server.route(path))
 
 
 module.exports = server;
