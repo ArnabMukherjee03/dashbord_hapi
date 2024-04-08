@@ -257,3 +257,19 @@ export const login = async (data) => {
     );
     return response.data;
   };
+
+  export const cardPermission = async (data) => {
+    const config = {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      }
+      
+    };
+  
+    const response = await axios.put(
+      `http://localhost:8080/cardpermission`,
+      data,
+      config
+    );
+    return response.data;
+  };

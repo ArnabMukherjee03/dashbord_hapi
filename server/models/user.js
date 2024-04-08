@@ -15,6 +15,10 @@ module.exports = (sequelize, DataTypes) => {
         through: 'UserBoardPermission',
         foreignKey: 'userId'
       })
+      user.belongsToMany(models.Card,{
+        through: 'CardPermission',
+        foreignKey: 'userId'
+      })
     }
   }
   user.init({

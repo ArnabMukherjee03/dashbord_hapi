@@ -60,7 +60,7 @@ export const CardDes = ({ taskId, close, task }) => {
             <div className="w-full mt-4">
                 {
                   isdisabled?
-                  <p onClick={()=>setIsDisabled(false)} className="w-full outline-none p-2 h-20 bg-white cursor-pointer">{description}</p>
+                  <p onClick={()=>setIsDisabled(false)} className="w-full outline-none p-2 h-10 bg-white cursor-pointer">{description}</p>
                   :
                   <>
                   <textarea onChange={(e)=>setDescription(e.target.value)} defaultValue={description} disabled={isdisabled}  name="" id="" cols="30" rows="10" className="w-full outline-none p-2 h-20 disabled:cursor-pointer"></textarea>

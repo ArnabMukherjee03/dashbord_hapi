@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from 'react-toastify';
 import { addReply, deleteComment } from "../api/api";
 
+
 export const Comment = ({ comment }) => {
   const [showReplyForm, setShowReplyForm] = useState(false);
   const [showReply, setShowReply] = useState(false);
@@ -63,8 +64,8 @@ export const Comment = ({ comment }) => {
  }
 
   return (
-    <div className="px-2 ">
-      <p className="text-sm">{comment.text}</p>
+    <div className="px-2 py-4 ">
+      <div dangerouslySetInnerHTML={{__html: comment?.text}} className="text-sm"></div>
       <div className="flex gap-2">
       <button
         onClick={toggleReplyForm}

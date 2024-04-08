@@ -188,7 +188,7 @@ export const Boards = () => {
                       <span className=" font-bold">{list.title}</span>
                       <div className="flex flex-col gap-2 mt-4">
                         {list?.Cards?.map((card) => {
-                          return <Card key={card.id} task={card} />;
+                          return <Card key={card.id} task={card} board={board?.board} />;
                         })}
                       {provided.placeholder}
                         <CreateCard length={list?.Cards?.length} listId={list?.id}/>

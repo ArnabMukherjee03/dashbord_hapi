@@ -1,6 +1,6 @@
 const Boom = require('@hapi/boom')
 const { UserBoardPermission,Board } = require('../models');
-const { where } = require('sequelize');
+
 
 
 exports.userPermission = async (req, res) => {

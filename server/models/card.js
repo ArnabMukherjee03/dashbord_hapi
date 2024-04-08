@@ -19,6 +19,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "cardId",
         onDelete: 'CASCADE'
       })
+      Card.belongsToMany(models.user,{
+        through: 'CardPermission',
+        foreignKey: 'taskId'
+      })
     }
   }
   Card.init({
